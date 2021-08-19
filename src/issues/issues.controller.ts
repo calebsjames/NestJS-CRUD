@@ -1,17 +1,21 @@
 import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
 import { get } from 'http';
 import { CreateIssueDto } from './dto/create-issue.dto';
+import { IssuesService } from './issues.service';
+import { Issue } from './interfaces/issue.interface';
 
 @Controller('issues')
 export class IssuesController {
+    constructor(private readonly issuesService: IssuesService) {}
+
     @Get()
-    findAll(): string {
-        return 'Get all issues'
+    findAll(): Issue[] {
+        return this.issuesService.findAll();
     }
 
     @Get(':id')
-    findOne(@Param('id') id): string {
-        return `Issue ${id}`;
+    findOne(@Param('id') id): Issue {
+        return this.issuesService.findOne(id);
     }
 
     @Post()
