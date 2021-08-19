@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Repository, UpdateResult, DeleteResult } from 'typeorm';
 import { Issue } from './interfaces/issue.interface';
 
 @Injectable()
