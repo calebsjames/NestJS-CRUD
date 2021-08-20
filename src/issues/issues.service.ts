@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Repository, UpdateResult, DeleteResult } from 'typeorm';
+import { UpdateResult, DeleteResult } from 'typeorm';
 import { Issue } from './interfaces/issue.interface';
 
 @Injectable()
@@ -31,5 +31,9 @@ export class IssuesService {
 
     findOne(id: string): Issue {
         return this.issues.find(i => i.id === id)
+    }
+
+    delete(id: string): DeleteResult {
+        return
     }
 }
