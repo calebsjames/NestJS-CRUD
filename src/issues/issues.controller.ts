@@ -1,9 +1,7 @@
-import { Controller, Get, Post, Put, Delete, Body, Param, Query } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, Query, Patch } from '@nestjs/common';
 import { get } from 'http';
 import { CreateIssueDto } from './dto/create-issue.dto';
 import { IssuesService } from './issues.service';
-import { Issue } from './interfaces/issue.interface';
-import { countReset } from 'console';
 
 @Controller('issues')
 export class IssuesController {
@@ -33,10 +31,18 @@ export class IssuesController {
         return issues
     }
 
-    @Put(':id')
-    async update(@Body() updateIssueDto: CreateIssueDto, @Param('id') id: string) {
-        const issues = await this.issuesService.findOne(id)
-        return issues
+    // @Patch(':id') 
+    // async update(@Body() updateIssueDto: CreateIssueDto, @Param('id') id: string) {
+    //     const issues = await this.issuesService.findOne(id)
+    //     return issues
+    // }
+
+    @Put(":id")
+    async update(    
+        @Param("id") id: string,
+        @Body() createIssueDto: CreateIssueDto  
+    ): Promise<CreateIssueDto> { 
+    return await this.issuesService.update(createIssueDto, id);  
     }
 
 }

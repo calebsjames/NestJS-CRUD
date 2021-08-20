@@ -47,14 +47,6 @@ export class IssuesService {
             resolve(this.issues)
         })
     }
-    
-
-    // update(issue): Promise<any> {
-    //     return new Promise (resolve => {
-    //         this.issues.push(issue);
-    //         resolve(this.issues)
-    //     })
-    // }
 
     async update(createIssueDto: CreateIssueDto, id: string): Promise<any> {
         try {
@@ -67,7 +59,7 @@ export class IssuesService {
           issue.comment_count = createIssueDto.comment_count;
           return await issue.save();
         } catch (error) {
-          throw new HttpException('Error updating article', 400);
+          throw new HttpException('Error updating issue', 400);
         }
       }
 
