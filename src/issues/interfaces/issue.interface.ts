@@ -1,5 +1,5 @@
 export interface Issue {
-    id?: string;
+    id?: number;
     title: string;
     url: string;
     description: string;

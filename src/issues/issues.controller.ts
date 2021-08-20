@@ -1,36 +1,48 @@
-import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, Query, Patch } from '@nestjs/common';
 import { get } from 'http';
 import { CreateIssueDto } from './dto/create-issue.dto';
 import { IssuesService } from './issues.service';
-import { Issue } from './interfaces/issue.interface';
 
 @Controller('issues')
 export class IssuesController {
     constructor(private readonly issuesService: IssuesService) {}
 
     @Get()
-    findAll(): Issue[] {
-        return this.issuesService.findAll();
+    async findAll() {
+        const issues = await this.issuesService.findAll();
+        return issues;
     }
-
+    
     @Get(':id')
-    findOne(@Param('id') id): Issue {
-        return this.issuesService.findOne(id);
+    async findOne(@Param('id') id) {
+        const issue = await this.issuesService.findOne(id);
+        return issue;
     }
 
     @Post()
-    create(@Body() createIssueDto: CreateIssueDto): string {
-        return `Title: ${createIssueDto.title} Description: ${createIssueDto.description}`
+    async create(@Body() createIssueDto: CreateIssueDto) {
+        const issue = await this.issuesService.create(createIssueDto)
+        return issue;
     }
 
-    @Delete(':id')
-    delete(@Param('id') id): string {
-        return `Deleted issue ${id}`
+    @Delete()
+    async delete(@Query() query) {
+        const issues = await this.issuesService.delete(query.issueId);
+        return issues
     }
 
-    @Put(':id')
-    update(@Body() updateIssueDto: CreateIssueDto, @Param('id') id): string {
-        return `Update ${id} - Title: ${updateIssueDto.title}`
+    // @Patch(':id') 
+    // async update(@Body() updateIssueDto: CreateIssueDto, @Param('id') id: string) {
+    //     const issues = await this.issuesService.findOne(id)
+    //     return issues
+    // }
+
+    @Put(":id")
+    async update(    
+        @Param("id") id: string,
+        @Body() createIssueDto: CreateIssueDto  
+    ): Promise<CreateIssueDto> { 
+    return await this.issuesService.update(createIssueDto, id);  
     }
 
 }

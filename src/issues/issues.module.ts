@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-
 import { IssuesController } from './issues.controller';
 import { IssuesService } from './issues.service';
 
@@ -8,4 +7,4 @@ import { IssuesService } from './issues.service';
   controllers: [IssuesController],
   providers: [IssuesService],
 })
-export class AppModule {}
+export class IssuesModule {}
