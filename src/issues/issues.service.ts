@@ -1,7 +1,4 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import { Repository, UpdateResult } from 'typeorm';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Issue } from './interfaces/issue.interface';
 import { ISSUES } from './issues.mock';
 import { CreateIssueDto } from './dto/create-issue.dto';
 
