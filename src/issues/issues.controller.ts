@@ -1,5 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Body, Param, Query, Patch } from '@nestjs/common';
-import { get } from 'http';
+import { Controller, Get, Post, Put, Delete, Body, Param, Query } from '@nestjs/common';
 import { CreateIssueDto } from './dto/create-issue.dto';
 import { IssuesService } from './issues.service';
 
