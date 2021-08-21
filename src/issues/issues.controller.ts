@@ -28,7 +28,7 @@ export class IssuesController {
     @Delete()
     async delete(@Query() query) {
         const issues = await this.issuesService.delete(query.issueId);
-        return issues
+        return issues;
     }
 
     // @Patch(':id') 
@@ -37,12 +37,10 @@ export class IssuesController {
     //     return issues
     // }
 
-    @Put(":id")
-    async update(    
-        @Param("id") id: string,
-        @Body() createIssueDto: CreateIssueDto  
-    ): Promise<CreateIssueDto> { 
-    return await this.issuesService.update(createIssueDto, id);  
+    @Put(':id')
+    async update(@Body() createIssueDto: CreateIssueDto, @Param('id') id) {
+        const issues = this.issuesService.update(createIssueDto, id);
+    return issues
     }
 
 }
