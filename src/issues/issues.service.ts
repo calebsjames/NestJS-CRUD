@@ -1,5 +1,6 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import { UpdateResult, DeleteResult } from 'typeorm';
+import { Repository, UpdateResult } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 import { Issue } from './interfaces/issue.interface';
 import { ISSUES } from './issues.mock';
 import { CreateIssueDto } from './dto/create-issue.dto';
@@ -48,19 +49,13 @@ export class IssuesService {
         })
     }
 
-    async update(createIssueDto: CreateIssueDto, id: string): Promise<any> {
-        try {
-          const issue = await this.findOne(id);
-          issue.title = createIssueDto.title;
-          issue.url = createIssueDto.url;
-          issue.description = createIssueDto.description;
-          issue.labels = createIssueDto.labels;
-          issue.author = createIssueDto.author;
-          issue.comment_count = createIssueDto.comment_count;
-          return await issue.save();
-        } catch (error) {
-          throw new HttpException('Error updating issue', 400);
-        }
-      }
+
+    update(createIssueDto: CreateIssueDto, id: number) {
+        const index = this.issues.findIndex(i => i.id === Number(id));
+        this.issues[index] = createIssueDto;
+          return this.issues;
+        
+
+}
 
 }

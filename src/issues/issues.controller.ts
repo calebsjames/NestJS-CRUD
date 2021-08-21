@@ -31,11 +31,6 @@ export class IssuesController {
         return issues;
     }
 
-    // @Patch(':id') 
-    // async update(@Body() updateIssueDto: CreateIssueDto, @Param('id') id: string) {
-    //     const issues = await this.issuesService.findOne(id)
-    //     return issues
-    // }
 
     @Put(':id')
     async update(@Body() createIssueDto: CreateIssueDto, @Param('id') id) {
