@@ -17,15 +17,23 @@ $ git@github.com:calebsjames/quore.git
 $ npm run start:dev
 ```
 
+## Data Structure
+    {
+        "id": 1,
+        "title": "The first issue",
+        "url": "www.google.com",
+        "description": "This is the first of many issues",
+        "labels": "Problem",
+        "author": "Caleb James",
+        "comment_count": 314
+    }
+
 ## Test
 
-```bash
-# unit tests
-$ npm run test
+In Postman:
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
+Get all: http://localhost:3000/issues
+Get one: http://localhost:3000/issues/1
+Post: http://localhost:3000/issues
+Delete: http://localhost:3000/issues/?issueId=4
+Put: http://localhost:3000/issues/1
