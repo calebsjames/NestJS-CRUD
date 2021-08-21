@@ -35,6 +35,6 @@ In Postman:
 Get all: http://localhost:3000/issues
 Get one: http://localhost:3000/issues/1
 Post: http://localhost:3000/issues
-Delete: http://localhost:3000/issues/?issueId=4
+Delete: http://localhost:3000/issues/?issueId=1
 Put: http://localhost:3000/issues/1
 ```
