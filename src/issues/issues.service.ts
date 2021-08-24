@@ -49,6 +49,9 @@ export class IssuesService {
 
     update(createIssueDto: CreateIssueDto, id: number) {
         const index = this.issues.findIndex(i => i.id === Number(id));
+        if (!index) {
+            throw new HttpException('Index not found', 404)
+        }
         this.issues[index] = createIssueDto;
           return this.issues;
         

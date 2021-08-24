@@ -24,6 +24,7 @@ export class IssuesController {
         return issue;
     }
 
+    //endpoint for delete is /issues/?issueId=4
     @Delete()
     async delete(@Query() query) {
         const issues = await this.issuesService.delete(query.issueId);

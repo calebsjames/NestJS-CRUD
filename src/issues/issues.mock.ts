@@ -5,7 +5,7 @@ export const ISSUES = [
         url: "www.google.com",
         description: "This is the first of many issues",
         labels: "Problem",
-        author: "Caleb James",
+        author: 1,
         comment_count: 314
     },
     {
