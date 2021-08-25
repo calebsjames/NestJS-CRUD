@@ -25,8 +25,6 @@ export class IssuesService {
     })
 }
 
-    delet
-
     delete(issueId): Promise<any> {
         let id = Number(issueId)
         return new Promise(resolve => {
@@ -50,7 +48,7 @@ export class IssuesService {
 
     update(createIssueDto: CreateIssueDto, id: number) {
         const index = this.issues.findIndex(i => i.id === Number(id));
-        if (!index) {
+        if (index < 0) {
             throw new HttpException('Index not found', 404)
         }
         this.issues[index] = createIssueDto;
