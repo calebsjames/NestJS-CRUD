@@ -8,7 +8,7 @@ Basic CRUD functionality with NestJs
 
 ```bash
 $ npm install
-$ git@github.com:calebsjames/quore.git
+$ git clone git@github.com:calebsjames/quore.git
 ```
 
 ## Running the app
