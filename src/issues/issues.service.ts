@@ -4,7 +4,7 @@ import { CreateIssueDto } from './dto/create-issue.dto';
 
 @Injectable()
 export class IssuesService {
-
+    
     issues = ISSUES
 
     findAll(): Promise<any> {
@@ -25,6 +25,7 @@ export class IssuesService {
     })
 }
 
+    delet
 
     delete(issueId): Promise<any> {
         let id = Number(issueId)
