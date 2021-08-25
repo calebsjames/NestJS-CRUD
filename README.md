@@ -15,6 +15,10 @@ $ git@github.com:calebsjames/quore.git
 
 ```bash
 $ npm run start:dev
+
+or
+
+$ docker-compose up dev
 ```
 
 ## Data Structure
