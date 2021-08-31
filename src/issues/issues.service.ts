@@ -1,17 +1,32 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { ISSUES } from './issues.mock';
 import { CreateIssueDto } from './dto/create-issue.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Issue } from 'src/entities/issues.entity';
+import { Repository } from 'typeorm';
+import { InjectModel } from '@nestjs/sequelize';
+import { IssueModel } from './issues.model';
+
 
 @Injectable()
 export class IssuesService {
     
     issues = ISSUES
 
-    findAll(): Promise<any> {
-        return new Promise(resolve => {
-            resolve(this.issues)
-    })
-}
+    constructor(
+        @InjectRepository(Issue)
+        private usersRepository: Repository<Issue>,
+      ) {}
+
+//     findAll(): Promise<any> {
+//         return new Promise(resolve => {
+//             resolve(this.issues)
+//     })
+// }
+
+    async findAll(): Promise<Issue[]> {
+        return this.usersRepository.find();
+    }    
 
 
     findOne(issueId): Promise<any> {
