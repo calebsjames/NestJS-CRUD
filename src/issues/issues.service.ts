@@ -13,6 +13,7 @@ export class IssuesService {
     
     issues = ISSUES
 
+
     constructor(
         @InjectRepository(Issue)
         private usersRepository: Repository<Issue>,
@@ -24,50 +25,51 @@ export class IssuesService {
 //     })
 // }
 
-    async findAll(): Promise<Issue[]> {
-        return this.usersRepository.find();
-    }    
+//     async findAll(): Promise<Issue[]> {
+//         return this.usersRepository.find();
+//     }    
 
+    async findAll() {
+        return this.issues
+    }
 
-    findOne(issueId): Promise<any> {
-        let id = Number(issueId)
-        return new Promise(resolve => {
-            const issue = this.issues.find(i => i.id === id);
-            if (!issue) {
-                throw new HttpException('ID does not exist', 404)
-            }
-            resolve(issue);
-    })
+    async findOne(issueId) {
+        let id = Number(issueId) 
+        const issue = this.issues.find(i => i.id === id);
+        if (!issue) {
+            throw new HttpException('ID does not exist', 404)
+        }
+        return(issue);
 }
 
-    delete(issueId): Promise<any> {
+    async delete(issueId) {
         let id = Number(issueId)
-        return new Promise(resolve => {
-            let index = this.issues.findIndex(issue => issue.id === id);
-            if (index === -1) {
-                throw new HttpException('Index not found', 404)
-            }
-            this.issues.splice(index, 1);
-            resolve(this.issues);
-    });
+        let index = this.issues.findIndex(issue => issue.id === id);
+        
+        if (index === -1) {
+            throw new HttpException('Index not found', 404)
+        }
+
+        this.issues.splice(index, 1);
+        return(this.issues);
+    ;
     }
 
 
-    create(issue): Promise<any> {
-        return new Promise(resolve => {
-            this.issues.push(issue);
-            resolve(this.issues)
-        })
+    async create(issue) {
+        this.issues.push(issue);
+        return(this.issues)
+        
     }
 
 
-    update(createIssueDto: CreateIssueDto, id: number) {
+    async update(createIssueDto: CreateIssueDto, id: number) {
         const index = this.issues.findIndex(i => i.id === Number(id));
         if (index < 0) {
             throw new HttpException('Index not found', 404)
         }
         this.issues[index] = createIssueDto;
-          return this.issues;
+        return this.issues;
         
 
 }
