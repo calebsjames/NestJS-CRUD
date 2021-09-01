@@ -1,16 +1,37 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { ISSUES } from './issues.mock';
 import { CreateIssueDto } from './dto/create-issue.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Issue } from 'src/entities/issues.entity';
+import { Repository } from 'typeorm';
+import { InjectModel } from '@nestjs/sequelize';
+import { IssueModel } from './issues.model';
+
 
 @Injectable()
 export class IssuesService {
     
     issues = ISSUES
 
+
+    constructor(
+        @InjectRepository(Issue)
+        private usersRepository: Repository<Issue>,
+      ) {}
+
+//     findAll(): Promise<any> {
+//         return new Promise(resolve => {
+//             resolve(this.issues)
+//     })
+// }
+
+//     async findAll(): Promise<Issue[]> {
+//         return this.usersRepository.find();
+//     }    
+
     async findAll() {
         return this.issues
     }
-
 
     async findOne(issueId) {
         let id = Number(issueId) 
@@ -19,7 +40,6 @@ export class IssuesService {
             throw new HttpException('ID does not exist', 404)
         }
         return(issue);
-    
 }
 
     async delete(issueId) {
